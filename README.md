@@ -167,3 +167,30 @@ luego web
 
 
 Solo dime: “empezamos” y lo montamos desde cero contigo.
+
+
+
+Te marco la línea clara de evolución de este proyecto
+🟢 Fase 1 (donde estás ahora)
+menú
+opciones
+input
+estructura básica
+
+👉 esto lo tienes casi hecho
+
+🟡 Fase 2 (la importante)
+datos en memoria (lista/diccionario)
+añadir gastos de verdad
+ver gastos reales
+
+👉 aquí es donde empiezas a programar de verdad
+
+🔴 Fase 3
+borrar gastos
+filtros
+organización
+⚫ Fase 4
+SQLite
+persistencia real
+estructura de proyecto
