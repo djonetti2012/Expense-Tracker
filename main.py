@@ -18,6 +18,7 @@ def seeExpenses():
 #----------- 1: Search By Date ---------#
 #----------- 2: Search By Name ---------#
 #----------- 3: Search By Ammount ------#
+#----------- 4: See All ----------------#
 #----------- 0: Back -------------------#
 #########################################
 """)
@@ -26,7 +27,7 @@ def seeExpenses():
         option = input("===> ")
         try:
             option = int(option)
-            if not (option > -1 and option < 4):
+            if not (option > -1 and option < 5):
                 os.system("cls")
                 print("---------- Wrong Option, Choose Again ----------")
                 continue
@@ -38,12 +39,15 @@ def seeExpenses():
         
         if option == 1:
             print("#----------- Searching By Date --------------#")
-            print("#----------- Insert date (dd/mm/yy) ---------#")
+            print("#----------- Insert date (dd/mm/yyyy) ---------#")
             date = input("===> ")
             results = []
+            number = 1
             for i in expenses:
                 if i["date"] == date:
                     results.append(i)
+            for i in results:
+                print(f"{number}: {i}")
 
 
 if __name__ == "__main__":
