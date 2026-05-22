@@ -1,8 +1,29 @@
 import os
+import sqlite3
 
+connection = sqlite3.connect("Expenses.db")
+cursor = connection.cursor()
+createTableQuery = '''
+CREATE TABLE IF NOT EXISTS Expenses (
+    name TEXT NOT NULL,
+    date TEXT NOT NULL,
+    ammount INTEGER NOT NULL
+)
+'''
+cursor.execute(createTableQuery)
+connection.commit()
 expenses = []
 
-def addExpense(name, date, money):
+def addExpense():
+    print("--------------Insert Expense Name-----------------")
+    name = input("===> ")
+    os.system("cls")
+    print("--------------Insert Expense Date (dd/mm/yyyy)----")
+    date = input("===> ")
+    os.system("cls")
+    print("--------------Insert Expense Ammount--------------")
+    money = input("===> ")
+    os.system("cls")
     expense = {
         "name" : name,
         "date" : date,
@@ -48,6 +69,7 @@ def seeExpenses():
                     results.append(i)
             for i in results:
                 print(f"{number}: {i}")
+            
 
 
 if __name__ == "__main__":
