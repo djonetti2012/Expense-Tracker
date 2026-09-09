@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import datetime
 
 connection = sqlite3.connect("Expenses.db")
 cursor = connection.cursor()
@@ -14,25 +15,55 @@ cursor.execute(createTableQuery)
 connection.commit()
 expenses = []
 
-def addExpense():
-    print("--------------Insert Expense Name-----------------")
-    name = input("===> ")
-    os.system("cls")
-    print("--------------Insert Expense Date (dd/mm/yyyy)----")
-    date = input("===> ")
-    os.system("cls")
-    print("--------------Insert Expense Ammount--------------")
-    money = input("===> ")
-    os.system("cls")
+def addExpense(name = "", date = "", money = 0):
+    if name == "":
+        print("--------------Insert Expense Name-----------------")
+        name = input("===> ")
+        os.system("cls")
+    if date == "":
+        print("--------------Insert Expense Date (dd/mm/yyyy)----")
+        date = input("===> ")
+        os.system("cls")
+    if money == 0:
+        print("--------------Insert Expense Ammount--------------")
+        money = input("===> ")
+        os.system("cls")
     expense = {
         "name" : name,
         "date" : date,
         "money" : money
     }
     expenses.append(expense)
-def deleteExpense(name):
-    pass
-def seeExpenses():
+def deleteExpense(search = "", type = ""):
+    if type == "":
+        while True:
+            print("""
+#########################################
+#------ Search which one to delete -----#
+#---------------------------------------#
+#----------- 1: Search By Date ---------#
+#----------- 2: Search By Name ---------#
+#----------- 3: Search By Ammount ------#
+#----------- 4: See All ----------------#
+#----------- 0: Back -------------------#
+#########################################
+""")
+            type = input("===> ")
+            try:
+                type = int(type)
+                if not (type > -1 and type < 5):
+                    os.system("cls")
+                    print("---------- Wrong Option, Choose Again ----------")
+                    continue
+            except ValueError:
+                os.system("cls")
+                print("---------- Wrong Option, Choose Again ----------")
+                continue
+            os.system("cls")
+
+    if search == "":
+        pass
+def seeExpenses(type = ""):
     while True:
         print("""
 #########################################
@@ -45,10 +76,10 @@ def seeExpenses():
 """)
         #Get User Option
         print("----- Choose An Option -----")
-        option = input("===> ")
+        type = input("===> ")
         try:
-            option = int(option)
-            if not (option > -1 and option < 5):
+            type = int(type)
+            if not (type > -1 and type < 5):
                 os.system("cls")
                 print("---------- Wrong Option, Choose Again ----------")
                 continue
@@ -58,7 +89,7 @@ def seeExpenses():
             continue
         os.system("cls")
         
-        if option == 1:
+        if type == 1:
             print("#----------- Searching By Date --------------#")
             print("#----------- Insert date (dd/mm/yyyy) ---------#")
             date = input("===> ")
@@ -67,9 +98,36 @@ def seeExpenses():
             for i in expenses:
                 if i["date"] == date:
                     results.append(i)
-            for i in results:
-                print(f"{number}: {i}")
-            
+                    print(f"{number}: {i}")
+                    number =+1
+            return results
+        elif type == 2:
+            print("#----------- Searching By Name --------------#")
+            print("#----------- Insert Name --------------#")
+            name = input("===> ")
+            results = []
+            number = 1
+            for i in expenses:
+                if i["name"] == name:
+                    results.append(i)
+                    print(f"{number}: {i}")
+                    number =+1
+            return results
+        elif type == 3:
+            print("#----------- Searching By ammount --------------#")
+            print("#----------- Insert Ammount --------------#")
+            ammount = input("===> ")
+            results = []
+            number = 1
+            for i in expenses:
+                if i["money"] == ammount:
+                    results.append(i)
+                    print(f"{number}: {i}")
+                    number =+1
+            return results
+        elif type == 0:
+            break
+
 
 
 if __name__ == "__main__":
