@@ -1,13 +1,12 @@
-import os
+import subprocess
 import sqlite3
 import datetime
-
 connection = sqlite3.connect("Expenses.db")
 cursor = connection.cursor()
 createTableQuery = '''
 CREATE TABLE IF NOT EXISTS Expenses (
     name TEXT NOT NULL,
-    date TEXT NOT NULL,
+    date TEXT NOT NULL,º
     ammount INTEGER NOT NULL
 )
 '''
@@ -19,15 +18,15 @@ def addExpense(name = "", date = "", money = 0):
     if name == "":
         print("--------------Insert Expense Name-----------------")
         name = input("===> ")
-        os.system("cls")
+        subprocess.run(["cmd", "/c", "cls"])
     if date == "":
         print("--------------Insert Expense Date (dd/mm/yyyy)----")
         date = input("===> ")
-        os.system("cls")
+        subprocess.run(["cmd", "/c", "cls"])
     if money == 0:
         print("--------------Insert Expense Ammount--------------")
         money = input("===> ")
-        os.system("cls")
+        subprocess.run(["cmd", "/c", "cls"])
     expense = {
         "name" : name,
         "date" : date,
@@ -52,14 +51,14 @@ def deleteExpense(search = "", type = ""):
             try:
                 type = int(type)
                 if not (type > -1 and type < 5):
-                    os.system("cls")
+                    subprocess.run(["cmd", "/c", "cls"])
                     print("---------- Wrong Option, Choose Again ----------")
                     continue
             except ValueError:
-                os.system("cls")
+                subprocess.run(["cmd", "/c", "cls"])
                 print("---------- Wrong Option, Choose Again ----------")
                 continue
-            os.system("cls")
+            subprocess.run(["cmd", "/c", "cls"])
 
     if search == "":
         pass
@@ -80,14 +79,14 @@ def seeExpenses(type = ""):
         try:
             type = int(type)
             if not (type > -1 and type < 5):
-                os.system("cls")
+                subprocess.run(["cmd", "/c", "cls"])
                 print("---------- Wrong Option, Choose Again ----------")
                 continue
         except ValueError:
-            os.system("cls")
+            subprocess.run(["cmd", "/c", "cls"])
             print("---------- Wrong Option, Choose Again ----------")
             continue
-        os.system("cls")
+        subprocess.run(["cmd", "/c", "cls"])
         
         if type == 1:
             print("#----------- Searching By Date --------------#")
@@ -125,6 +124,12 @@ def seeExpenses(type = ""):
                     print(f"{number}: {i}")
                     number =+1
             return results
+        elif type == 4:
+            print("#----------- Showing all --------------#")
+            number = 1
+            for i in expenses:
+                print(f"{number}: {i}")
+                number =+ 1
         elif type == 0:
             break
 
@@ -153,14 +158,14 @@ if __name__ == "__main__":
         try:
             option = int(option)
             if not (option > 0 and option < 4):
-                os.system("cls")
+                subprocess.run(["cmd", "/c", "cls"])
                 print("---------- Wrong Option, Choose Again ----------")
                 continue
         except ValueError:
-            os.system("cls")
+            subprocess.run(["cmd", "/c", "cls"])
             print("---------- Wrong Option, Choose Again ----------")
             continue
-        os.system("cls")
+        subprocess.run(["cmd", "/c", "cls"])
         if option == 1:
             addExpense()
         elif option == 2:
